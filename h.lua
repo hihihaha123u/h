@@ -1,179 +1,19 @@
---[ SERVICES ]--
-local Players = game:GetService("Players")
-local UserInputService = game:GetService("UserInputService")
-local TweenService = game:GetService("TweenService")
-local RunService = game:GetService("RunService")
+local _0x52756e = "\x6c\x6f\x61\x64\x73\x74\x72\x69\x6e\x67"
+local _0x436f6465 = "LS1bIFNFUlZJQ0VTIF0tLQpsb2NhbCBQbGF5ZXJzID0gZ2FtZTpHZXRTZXJ2aWNlKCJQbGF5ZXJzIikKbG9jYWwgVXNlcklucHV0U2VydmljZSA9IGdhbWU6R2V0U2VydmljZSgiVXNlcklucHV0U2VydmljZSIpCmxvY2FsIFR3ZWVuU2VydmljZSA9IGdhbWU6R2V0U2VydmljZSgiVHdlZW5TZXJ2aWNlIikKbG9jYWwgUnVuU2VydmljZSA9IGdhbWU6R2V0U2VydmljZSgiUnVuU2VydmljZSIpCgpsb2NhbCBwbGF5ZXIgPSBQbGF5ZXJzLkxvY2FsUGxheWVyCmxvY2FsIHBsYXllckd1aSA9IHBsYXllcjpXYWl0Rm9yQ2hpbGQoIlBsYXllckd1aSIpCgotLVsgVUkgQ09ORklHVVJDVElPTiBdLS0KbG9jYWwgc2NyZWVuR3VpID0gSW5zdGFuY2UubmV3KCJTY3JlZW5HdWkiKQpzY3JlZW5HdWkuTmFtZSA9ICJUcmFkZUhlbHBlclVJIgpzY3JlZW5HdWkuUmVzZXRPblNwYXduID0gZmFsc2UKc2NyZWVuR3VpLlBhcmVudCA9IHBsYXllckd1aQoKbG9jYWwgbWFpbkZyYW1lID0gSW5zdGFuY2UubmV3KCJGcmFtZSIpCm1haW5GcmFtZS5OYW1lID0gIk1haW5GcmFtZSIKbWFpbkZyYW1lLlNpemUgPSBVRGltMi5uZXcoMCwgMjgwLCAwLCAxNjApCm1haW5GcmFtZS5Qb3NpdGlvbiA9IFVBaW0yLm5ldygwLjUsIC0xNDAsIDAuMywgMCkKbWFpbkZyYW1lLkJhY2tncm91bmRDb2xvcjMgPSBDb2xvcjMuZnJvbVJHQigyNSwgMjUsIDM1KQptYWluRnJhbWUuQm9yZGVyU2l6ZVBpeGVsID0gMAptYWluRnJhbWUuUGFyZW50ID0gc2NyZWVuR3VpCgpsb2NhbCBjb3JuZXIgPSBJbnN0Ym5jZS5uZXcoIlVJQ29ybmVyIikKY29ybmVyLkNvcm5lclJhZGl1cyA9IFVBaW0ubmV3KDAsIDEyKQpjb3JuZXIuUGFyZW50ID0gbWFpbkZyYW1lCgpsb2NhbCBncmFkaWVudCA9IEluc3RhbmNlLm5ldygiVUlHcmFkaWVudCIpCmdyYWRpZW50LkNvbG9yID0gQ29sb3JTZXF1ZW5jZS5uZXd7CiAgICBDb2xvclNlcXVlbmNlS2V5cG9pbnQubmV3KDAsIENvbG9yMy5mcm9tUkdCKDQ1LCA0NSwgNjApKSwKICAgIENvbG9yU2VxdWVuY2VLZXlwb2ludC5uZXcoMSwgQ29sb3IzLmZyb21SR0IoMjAsIDIwLCAzMCkpCn0KZ3JhZGllbnQuUm90YXRpb24gPSA0NQpncmFkaWVudC5QYXJlbnQgPSBtYWluRnJhbWUKCmxvY2FsIHRpdGxlTGFiZWwgPSBJbnN0Ym5jZS5uZXcoIlRleHRMYWJlbCIpCnRpdGxlTGFiZWwuU2l6ZSA9IFVBaW0yLm5ldygxLCAwLCAwLCAzNSkKdGl0bGVMYWJlbC5CYWNrZ3JvdW5kVHJhbnNwYXJlbmN5ID0gMQp0aXRsZUxhYmVsLlRleHQgPSAiVHJhZGUgU2NhbSBGcmVlemUiCnRpdGxlTGFiZWwuVGV4dENvbG9yMyA9IENvbG9yMy5mcm9tUkdCKDI1NSwgMjU1LCAyNTUpCnRpdGxlTGFiZWwuRm9udCA9IEVudW0uRm9udC5Hb3RoYW1Cb2xkCnRpdGxlTGFiZWwuVGV4dFNpemUgPSAxNgp0aXRsZUxhYmVsLlBhcmVudCA9IG1haW5GcmFtZQoKbG9jYWwgc3RhdHVzTGFiZWwgPSBJbnN0Ym5jZS5uZXcoIlRleHRMYWJlbCIpCnN0YXR1c0xhYmVsLlNpemUgPSBVRGltMi5uZXcoMSwgMCwgMCwgMjApCnN0YXR1c0xhYmVsLlBvc2l0aW9uID0gVURpbTIubmV3KDAsIDAsIDAsIDMwKQpzdGF0dXNMYWJlbC5CYWNrZ3JvdW5kVHJhbnNwYXJlbmN5ID0gMQpzdGF0dXNMYWJlbC5UZXh0ID0gIlN0YXR1czogV2FpdGluZy4uLiIKc3RhdHVzTGFiZWwuVGV4dENvbG9yMyA9IENvbG9yMy5mcm9tUkdCKDIwMCwgMjAwLCAyMDApCnN0YXR1c0xhYmVsLkZvbnQgPSBFbnVtLkZvbnQuR290aGFtCnN0YXR1c0xhYmVsLlRleHRTaXplID0gMTIKc3RhdHVzTGFiZWwuUGFyZW50ID0gbWFpbkZyYW1lCgpsb2NhbCBmdW5jdGlvbiBjcmVhdGVUb2dnbGUobmFtZSwgcG9zWSkKICAgIGxvY2FsIHRvZ2dsZURhdGEgPSB7RW5hYmxlZCA9IGZhbHNlfQogICAgCiAgICBsb2NhbCBidG4gPSBJbnN0Ym5jZS5uZXcoIlRleHRCdXR0b24iKQogICAgYnRuLk5hbWUgPSBuYW1lCiAgICBidG4uU2l6ZSA9IFVBaW0yLm5ldygwLCAyNDAsIDAsIDM1KQogICAgYnRuLlBvc2l0aW9uID0gVURpbTIubmV3KDAuNSwgLTEyMCwgMCwgcG9zWSkKICAgIGidG4uQmFja2dyb3VuZENvbG9yMyA9IENvbG9yMy5mcm9tUkdCKDQwLCA0MCwgNTUpCiAgICBidG4uVGV4dCA9ICIiCiAgICBidG4uQXV0b0J1dHRvbkNvbG9yID0gZmFsc2UKICAgIGidG4uUGFyZW50ID0gbWFpbkZyYW1lCiAgICAKICAgIGxvY2FsIGidG5Db3JuZXIgPSBJbnN0Ym5jZS5uZXcoIlVJQ29ybmVyIiwgYnRuKQogICAgYnRuQ29ybmVyLkNvcm5lclJhZGl1cyA9IFVBaW0ubmV3KDAsIDgpCiAgICAKICAgIGxvY2FsIGxhYmVsID0gSW5zdGFuY2UubmV3KCJUZXh0TGFiZWwiKQogICAgbGFiZWwuU2l6ZSA9IFVBaW0yLm5ldygxLCAtNjAsIDEsIDApCiAgICBsYWJlbC5Qb3NpdGlvbiA9IFVBaW0yLm5ldygwLCAxNSwgMCwgMCkKICAgIGxhYmVsLkJhY2tncm91bmRUcmFuc3BhcmVuY3kgPSAxCiAgICBsYWJlbC5UZXh0ID0gbmFtZQogICAgbGFiZWwuVGV4dENvbG9yMyA9IENvbG9yMy5mcm9tUkdCKDIwMCwgMjAwLCAyMDApCiAgICBsYWJlbC5UZXh0WEFsaWdubWVudCA9IEVudW0uVGV4dFhBbGlnbm1lbnQuTGVmdAogICAgbGFiZWwuRm9udCA9IEVudW0uRm9udC5Hb3RoYW0KICAgIGxhYmVsLlRleHRTaXplID0gMTQKICAgIGxhYmVsLlBhcmVudCA9IGJ0bgogICAgCiAgICBsb2NhbCBpbmRpY2F0b3IgPSBJbnN0Ym5jZS5uZXcoIkZyYW1lIikKICAgIGluZGljYXRvci5TaXplID0gVURpbTIubmV3KDAsIDQwLCAwLCAyMCkKICAgIGluZGljYXRvci5Qb3NpdGlvbiA9IFVBaW0yLm5ldygxLCAtNTAsIDAuNSwgLTEwKQogICAgaW5kaWNhdG9yLkJhY2tncm91bmRDb2xvcjMgPSBDb2xvcjMuZnJvbVJHQig2MCwgNjAsIDc1KQogICAgaW5kaWNhdG9yLlBhcmVudCA9IGJ0bgogICAgCiAgICBJbnN0Ym5jZS5uZXcoIlVJQ29ybmVyIiwgaW5kaWNhdG9yKS5Db3JuZXJSYWRpdXMgPSBVRGltLm5ldygxLCAwKQogICAgCiAgICBsb2NhbCBrbm9iID0gSW5zdGFuY2UubmV3KCJGcmFtZSIpCiAgICBrbm9iLlNpemUgPSBVRGltMi5uZXcoMCwgMTYsIDAsIDE2KQogICAga25vYi5Qb3NpdGlvbiA9IFVBaW0yLm5ldygwLCAyLCAwLjUsIC04KQogICAga25vYi5CYWNrZ3JvdW5kQ29sb3IzID0gQ29sb3IzLmZyb21SR0IoMjU1LCAyNTUsIDI1NSkKICAgIGtub2IuUGFyZW50ID0gaW5kaWNhdG9yCiAgICBJbnN0Ym5jZS5uZXcoIlVJQ29ybmVyIiwga25vYikuQ29ybmVyUmFkaXVzID0gVURpbS5uZXcoMSwgMCkKCiAgICBmdW5jdGlvbiB0b2dnbGVEYXRhOlVwZGF0ZShzdGF0ZSkKICAgICAgICBzZWxmLkVuYWJsZWQgPSBzdGF0ZQogICAgICAgIGxvY2FsIHRhcmdldENvbG9yID0gc3RhdGUgYW5kIENvbG9yMy5mcm9tUkdCKDUwLCAyMDAsIDEwMCkgb3IgQ29sb3IzLmZyb21SR0IoNjAsIDYwLCA3NSkKICAgICAgICBsb2NhbCB0YXJnZXRQb3MgPSBzdGF0ZSBhbmQgVURpbTIubmV3KDEsIC0xOCwgMC41LCAtOCkgb3IgVURpbTIubmV3KDAsIDIsIDAuNSwgLTgpCiAgICAgICAgCiAgICAgICAgVHdlZW5TZXJ2aWNlOkNyZWF0ZShpbmRpY2F0b3IsIFR3ZWVuSW5mby5uZXcoMC4yKSwge0JhY2tncm91bmRDb2xvcjMgPSB0YXJnZXRDb2xvcn0pOlBsYXkoKQogICAgICAgIFR3ZWVuU2VydmljZTpDcmVhdGUoa25vYiwgVHdlZW5JbmZvLm5ldygwLjIpLCB7UG9zaXRpb24gPSB0YXJnZXRQb3N9KTpQbGF5KCkKICAgICAgICBUd2VlblNlcnZpY2U6Q3JlYXRlKGxhYmVsLCBUd2VlbkluZm8ubmV3KDAuMiksIHtUZXh0Q29sb3IzID0gc3RhdGUgYW5kIENvbG9yMy5uZXcoMSwxLDEpIG9yIENvbG9yMy5mcm9tUkdCKDIwMCwyMDAsMjAwKX0pOlBsYXkoKQogICAgZW5kCgogICAgYnRuLk1vdXNlQnV0dG9uMUNsaWNrOkNvbm5lY3QoZnVuY3Rpb24oKQogICAgICAgIHRvZ2dsZURhdGE6VXBkYXRlKG5vdCB0b2dnbGVEYXRhLkVuYWJsZWQpCiAgICBlbmQpCgogICAgcmV0dXJuIHRvZ2dsZURhdGEKZW5kCgpsb2NhbCBmcmVlemVUb2dnbGUgPSBjcmVhdGVUb2dnbGUoIkZyZWV6ZSBUcmFkZSIsIDY1KQpsb2NhbCBmb3JjZVRvZ2dsZSA9IGNyZWF0ZVRvZ2dsZSgiRm9yY2UgQWNjZXB0IiwgMTA1KQoKbG9jYWwgZHJhZ2dpbmcsIGRyYWdJbnB1dCwgZHJhZ1N0YXJ0LCBzdGFydFBvcwoKbWFpbkZyYW1lLklucHV0QmVnYW46Q29ub25lY3QoZnVuY3Rpb24oaW5wdXQpCiAgICBpZiAoaW5wdXQuVXNlcklucHV0VHlwZSA9PSBFbnVtLlVzZXJJbnB1dFR5cGUuTW91c2VCdXR0b24xIG9yIGlucHV0LlVzZXJJbnB1dFR5cGUuVG91Y2gpIHRoZW4KICAgICAgICBkcmFnZ2luZyA9IHRydWUKICAgICAgICBkcmFnU3RhcnQgPSBpbnB1dC5Qb3NpdGlvbgogICAgICAgIHN0YXJ0UG9zID0gbWFpbkZyYW1lLlBvc2l0aW9uCiAgICAgICAgCiAgICAgICAgaW5wdXQuQ2hhbmdlZDpDb25uZWN0KGZ1bmN0aW9uKCkKICAgICAgICAgICAgaWYgaW5wdXQuVXNlcklucHV0U3RhdGUgPT0gRW51bS5Vc2VySW5wdXRTdGF0ZS5FbmQgdGhlbgogICAgICAgICAgICAgICAgZHJhZ2dpbmcgPSBmYWxzZQogICAgICAgICAgICBlbmQKICAgICAgICBlbmQpCiAgICBlbmQKZW5kKQoKVXNlcklucHV0U2VydmljZS5JbnB1dENoYW5nZWQ6Q29ub25lY3QoZnVuY3Rpb24oaW5wdXQpCiAgICBpZiBkcmFnZ2luZyBhbmQgKGlucHV0LlVzZXJJbnB1dFR5cGUgPT0gRW51bS5Vc2VySW5wdXRTdGF0ZS5Nb3VzZU1vdmVtZW50IG9yIGlucHV0LlVzZXJJbnB1dFR5cGUuVG91Y2gpIHRoZW4KICAgICAgICBsb2NhbCBkZWx0YSA9IGlucHV0LlBvc2l0aW9uIC0gZHJhZ1N0YXJ0CiAgICAgICAgbWFpbkZyYW1lLlBvc2l0aW9uID0gVURpbTIubmV3KHN0YXJ0UG9zLlguU2NhbGUsIHN0YXJ0UG9zLlguT2Zmc2V0ICsgZGVsdGEuWCwgc3RhcnRQb3MuWS5TY2FsZSwgc3RhcnRQb3MuWS5PZmZzZXQgKyBkZWx0YS5ZKQogICAgZW5kCmVuZCkKCmxvY2FsIGZ1bmN0aW9uIGdldFRyYWRlUGFydG5lcigpCiAgICBsb2NhbCBtYWluID0gcGxheWVyR3VpOkZpbmRGaXJzdENoaWxkKCJNYWluIikKICAgIGlmIG1haW4gYW5kIG1haW46RmluZEZpcnN0Q2hpbGQoIlRyYWRlIikgYW5kIG1haW4uVHJhZGUuVmlzaWJsZSB0aGVuCiAgICAgICAgbG9jYWwgY29udGFpbmVyID0gbWFpbi5UcmFkZTpGaW5kRmlyc3RDaGlsZCgiQ29udGFpbmVyIikKICAgICAgICBpZiBjb250YWluZXIgdGhlbgogICAgICAgICAgICBmb3IgaSA9IDEsIDIgZG8KICAgICAgICAgICAgICAgIGxvY2FsIGZyYW1lID0gY29udGFpbmVyOkZpbmRGaXJzdENoaWxkKHRvc3RyaW5nKGkpKQogICAgICAgICAgICAgICAgbG9jYWwgbGFiZWwgPSBmcmFtZSBhbmQgZnJhbWU6RmluZEZpcnN0Q2hpbGQoIlRleHRMYWJlbCIpCiAgICAgICAgICAgICAgICBpZiBsYWJlbCBhbmQgbGFiZWwuVGV4dCA9PSBwbGF5ZXIuTmFtZSBhbmQgbGFiZWwuVGV4dCA9PSBwbGF5ZXIuRGlzcGxheU5hbWUgdGhlbgogICAgICAgICAgICAgICAgICAgIHJldHVybiBsYWJlbC5UZXh0CiAgICAgICAgICAgICAgICBlbmQKICAgICAgICAgICAgZW5kCiAgICAgICAgZW5kCiAgICBlbmQKICAgIHJldHVybiBuaWwKZW5kCgpSdW5TZXJ2aWNlLkhlYXJ0YmVhdDpDb25uZWN0KGZ1bmN0aW9uKCkKICAgIGxvY2FsIHBhcnRuZXIgPSBnZXRUcmFkZVBhcnRuZXIoKQogICAgaWYgcGFydG5lciB0aGVuCiAgICAgICAgc3RhdHVzTGFiZWwuVGV4dCA9ICJUcmFkaW5nIHdpdGg6ICIgLi4gcGFydG5lcgogICAgICAgIHN0YXJ0dXNMYWJlbC5UZXh0Q29sb3IzID0gQ29sb3IzLmZyb21SR0IoMTAwLCAyNTUsIDE1MCkKICAgIGVsc2UKICAgICAgICBzdGF0dXNMYWJlbC5UZXh0ID0gIlN0YXR1czogTm90IGluIHRyYWRlIgogICAgICAgIHN0YXR1c0xhYmVsLlRleHRDb2xvcjMgPSBDb2xvcjMuZnJvbVJHQigyNTUsIDEwMCwgMTAwKQogICAgICAgIGlmIGZyZWV6ZVRvZ2dsZS5FbmFibGVkIHRoZW4gZnJlZXplVG9nZ2xlOlVwZGF0ZShmYWxzZSkgZW5kCiAgICAgICAgaWYgZm9yY2VUb2dnbGUuRW5hYmxlZCB0aGVuIGZvcmNlVG9nZ2xlOlVwZGF0ZShmYWxzZSkgZW5kCiAgICBlbmQKZW5kKQoKbWFpbkZyYW1lLlNpemUgPSBVRGltMi5uZXcoMCwgMCwgMCwgMCkKVHdlZW5TZXJ2aWNlOkNyZWF0ZShtYWluRnJhbWUsIFR3ZWVuSW5mby5uZXcoMC42LCBFbnVtLkVhc2luZ1N0eWxlLkJhY2spLCB7U2l6ZSA9IFVBaW0yLm5ldygwLCAyODAsIDAsIDE2MCl9KTpQbGF5KCk="
 
---[ VARIABLES ]--
-local player = Players.LocalPlayer
-local playerGui = player:WaitForChild("PlayerGui")
-
---[ UI CONFIGURATION ]--
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "TradeHelperUI"
-screenGui.ResetOnSpawn = false -- Giữ UI không mất khi nhân vật reset
-screenGui.Parent = playerGui
-
-local mainFrame = Instance.new("Frame")
-mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.new(0, 280, 0, 160)
-mainFrame.Position = UDim2.new(0.5, -140, 0.3, 0)
-mainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
-mainFrame.BorderSizePixel = 0
-mainFrame.Parent = screenGui
-
-local corner = Instance.new("UICorner")
-corner.CornerRadius = UDim.new(0, 12)
-corner.Parent = mainFrame
-
--- Thêm Gradient cho đẹp
-local gradient = Instance.new("UIGradient")
-gradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(45, 45, 60)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(20, 20, 30))
-}
-gradient.Rotation = 45
-gradient.Parent = mainFrame
-
-local titleLabel = Instance.new("TextLabel")
-titleLabel.Size = UDim2.new(1, 0, 0, 35)
-titleLabel.BackgroundTransparency = 1
-titleLabel.Text = "Trade Scam Freeze"
-titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-titleLabel.Font = Enum.Font.GothamBold
-titleLabel.TextSize = 16
-titleLabel.Parent = mainFrame
-
-local statusLabel = Instance.new("TextLabel")
-statusLabel.Size = UDim2.new(1, 0, 0, 20)
-statusLabel.Position = UDim2.new(0, 0, 0, 30)
-statusLabel.BackgroundTransparency = 1
-statusLabel.Text = "Status: Waiting..."
-statusLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-statusLabel.Font = Enum.Font.Gotham
-statusLabel.TextSize = 12
-statusLabel.Parent = mainFrame
-
---[ UTILS ]--
-local function createToggle(name, posY)
-    local toggleData = {Enabled = false}
-    
-    local btn = Instance.new("TextButton")
-    btn.Name = name
-    btn.Size = UDim2.new(0, 240, 0, 35)
-    btn.Position = UDim2.new(0.5, -120, 0, posY)
-    btn.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
-    btn.Text = ""
-    btn.AutoButtonColor = false
-    btn.Parent = mainFrame
-    
-    local btnCorner = Instance.new("UICorner", btn)
-    btnCorner.CornerRadius = UDim.new(0, 8)
-    
-    local label = Instance.new("TextLabel")
-    label.Size = UDim2.new(1, -60, 1, 0)
-    label.Position = UDim2.new(0, 15, 0, 0)
-    label.BackgroundTransparency = 1
-    label.Text = name
-    label.TextColor3 = Color3.fromRGB(200, 200, 200)
-    label.TextXAlignment = Enum.TextXAlignment.Left
-    label.Font = Enum.Font.Gotham
-    label.TextSize = 14
-    label.Parent = btn
-    
-    local indicator = Instance.new("Frame")
-    indicator.Size = UDim2.new(0, 40, 0, 20)
-    indicator.Position = UDim2.new(1, -50, 0.5, -10)
-    indicator.BackgroundColor3 = Color3.fromRGB(60, 60, 75)
-    indicator.Parent = btn
-    
-    Instance.new("UICorner", indicator).CornerRadius = UDim.new(1, 0)
-    
-    local knob = Instance.new("Frame")
-    knob.Size = UDim2.new(0, 16, 0, 16)
-    knob.Position = UDim2.new(0, 2, 0.5, -8)
-    knob.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    knob.Parent = indicator
-    Instance.new("UICorner", knob).CornerRadius = UDim.new(1, 0)
-
-    function toggleData:Update(state)
-        self.Enabled = state
-        local targetColor = state and Color3.fromRGB(50, 200, 100) or Color3.fromRGB(60, 60, 75)
-        local targetPos = state and UDim2.new(1, -18, 0.5, -8) or UDim2.new(0, 2, 0.5, -8)
-        
-        TweenService:Create(indicator, TweenInfo.new(0.2), {BackgroundColor3 = targetColor}):Play()
-        TweenService:Create(knob, TweenInfo.new(0.2), {Position = targetPos}):Play()
-        TweenService:Create(label, TweenInfo.new(0.2), {TextColor3 = state and Color3.new(1,1,1) or Color3.fromRGB(200,200,200)}):Play()
-    end
-
-    btn.MouseButton1Click:Connect(function()
-        toggleData:Update(not toggleData.Enabled)
-    end)
-
-    return toggleData
+local _0x4c6962 = function(_0x64617461)
+    local _0x62 = '\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4a\x4b\x4c\x4d\x4e\x4f\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5a\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6a\x6b\x6c\x6d\x6e\x6f\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7a\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x2b\x2f'
+    _0x64617461 = string.gsub(_0x64617461, '[^'.._0x62..'=]', '')
+    return (_0x64617461:gsub('.', function(_0x78)
+        if (_0x78 == '=') then return '' end
+        local _0x72, _0x66 = '', (_0x62:find(_0x78) - 1)
+        for i = 6, 1, -1 do _0x72 = _0x72 .. (_0x66 % 2^i - _0x66 % 2^(i - 1) > 0 and '1' or '0') end
+        return _0x72;
+    end):gsub('%d%d%d%d%d%d%d%d', function(_0x78)
+        local _0x63 = 0
+        for i = 1, 8 do _0x63 = _0x63 + (_0x78:sub(i, i) == '1' and 2^(8 - i) or 0) end
+        return string.char(_0x63)
+    end))
 end
 
-local freezeToggle = createToggle("Freeze Trade", 65)
-local forceToggle = createToggle("Force Accept", 105)
-
---[ LOGIC DRAG ]-- (Hệ thống kéo thả mượt hơn)
-local dragging, dragInput, dragStart, startPos
-
-mainFrame.InputBegan:Connect(function(input)
-    if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
-        dragging = true
-        dragStart = input.Position
-        startPos = mainFrame.Position
-        
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragging = false
-            end
-        end)
-    end
-end)
-
-UserInputService.InputChanged:Connect(function(input)
-    if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
-        local delta = input.Position - dragStart
-        mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-    end
-end)
-
---[ TRADE CHECKER ]--
-local function getTradePartner()
-    local main = playerGui:FindFirstChild("Main")
-    if main and main:FindFirstChild("Trade") and main.Trade.Visible then
-        -- Cố gắng tìm tên partner từ UI của game
-        local container = main.Trade:FindFirstChild("Container")
-        if container then
-            for i = 1, 2 do
-                local frame = container:FindFirstChild(tostring(i))
-                local label = frame and frame:FindFirstChild("TextLabel")
-                if label and label.Text ~= player.Name and label.Text ~= player.DisplayName then
-                    return label.Text
-                end
-            end
-        end
-    end
-    return nil
-end
-
-RunService.Heartbeat:Connect(function()
-    local partner = getTradePartner()
-    if partner then
-        statusLabel.Text = "Trading with: " .. partner
-        statusLabel.TextColor3 = Color3.fromRGB(100, 255, 150)
-    else
-        statusLabel.Text = "Status: Not in trade"
-        statusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
-        
-        -- Tự động tắt toggle nếu thoát trade
-        if freezeToggle.Enabled then freezeToggle:Update(false) end
-        if forceToggle.Enabled then forceToggle:Update(false) end
-    end
-end)
-
--- Intro Animation
-mainFrame.Size = UDim2.new(0, 0, 0, 0)
-TweenService:Create(mainFrame, TweenInfo.new(0.6, Enum.EasingStyle.Back), {Size = UDim2.new(0, 280, 0, 160)}):Play()
+getfenv()[_0x4c6962("\x62\x47\x39\x68\x5a\x48\x4e\x30\x63\x6e\x6c\x75\x5a\x77\x3d\x3d")](_0x4c6962(_0x436f6465))()
