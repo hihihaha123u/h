@@ -1,1 +1,3 @@
-
+TERMUX_DEVICE_1
+adr1
+Abc+10DfgT057T
