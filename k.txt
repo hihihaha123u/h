@@ -1,4 +1,1 @@
-#hwid
 27c5e9dfeb014192b3928c5c1297e180
-#key
-Abc+195DF+5
